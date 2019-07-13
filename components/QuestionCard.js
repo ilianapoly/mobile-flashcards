@@ -31,6 +31,7 @@ class QuestionCard extends Component {
     );
   }
 
+
   showAnswer(flipTheCard) {
     const { card } = this.props;
     return (
