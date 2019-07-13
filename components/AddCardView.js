@@ -37,7 +37,7 @@ class AddCardView extends Component {
 
         return (
 
-            <ScrollView>
+            <ScrollView >
                 <KeyboardAvoidingView behavior="padding">
                     <Text>
                         Add new card for deck {deckTitle}

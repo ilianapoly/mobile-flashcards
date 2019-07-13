@@ -49,7 +49,7 @@ class DeckListView extends Component {
 
                  return (
                     <TouchableOpacity key={deckTitle} onPress={() => this.navigateToDeckView(deckTitle)}>
-                        <Card style={{padding:8, margin:16, backgroundColor:'#effff7'}} elevation={2}>
+                        <Card style={{padding:8, margin:16, backgroundColor:'#ffffff'}} elevation={2}>
                             <Card.Title style={{padding:20, margin:16, }} title={deck.title} subtitle={`${deck.questions.length} cards`} left={(props) => <Avatar.Icon {...props} icon="folder" />} />
                         </Card>
                    </TouchableOpacity>

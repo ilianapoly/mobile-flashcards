@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text, ScrollView } from "react-native";
-import { Button } from 'react-native-paper';
+import { Button, Surface } from 'react-native-paper';
 
 class QuestionCard extends Component {
 
@@ -10,13 +10,17 @@ class QuestionCard extends Component {
             const { card } = this.props;
 
             return (
-                  <View>
-                        <Text>{card.question}</Text>
-                        <Button mode="contained"
-                            onPress={flipTheCard}>
-                            Show Answer
+              <Surface>
+                  <View style={{alignItems:'center'}}>
+                        <Text style={{fontSize:48, alignSelf: 'center', alignItems:'center'}}>
+                          {card.question}
+                        </Text>
+                        <Button mode="outlined" onPress={flipTheCard} >
+                          <Text style={{color:'#ee0001'}}>Show Answer</Text>
+
                         </Button>
                   </View>
+              </Surface>
             );
       }
 

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, ScrollView, Text } from "react-native";
-import { Button, Card } from 'react-native-paper';
+import { Button, Card, Surface} from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 
 class DeckView extends Component {
 
@@ -32,21 +33,43 @@ class DeckView extends Component {
     return (
 
       <ScrollView>
-         <Card >
-            <Text>{deck.title}</Text>
-            <Text>{deck.questions.length}</Text>
-            <Button mode="contained" onPress={() => this.navigateToAddCardView()}>
+
+
+          <Card style={{padding:8, margin:16, backgroundColor:'#fff',  }} elevation={2}>
+            <Card.Title style={{padding:20, margin:16, }} title={deck.title} subtitle={`${deck.questions.length} cards`} />
+
+            <Card.Actions style={{ justifyContent:'flex-end'}}>
+              <Button mode="outlined" onPress={() => this.navigateToAddCardView()} >
                 Add Card
-            </Button>
-            <Button mode="contained" onPress={() => this.navigateToQuiz()}>
+              </Button>
+              <Button mode="contained" onPress={() => this.navigateToQuiz()} style={{marginLeft:16}}>
                 Start Quiz
-            </Button>
-        </Card>
+              </Button>
+            </Card.Actions>
+
+          </Card>
+
+
+
+
+
       </ScrollView>
     )
 
   }
 }
+
+const styles = StyleSheet.create({
+  surface: {
+    padding: 8,
+    height:'100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+    backgroundColor: '#d67eff' ,
+  },
+});
+
 
 const mapStateToProps = (decks, navProps) => {
 
