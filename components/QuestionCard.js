@@ -42,9 +42,10 @@ class QuestionCard extends Component {
             const { card } = this.props;
 
             return (
-                  <View>
-                    <Text>{card.answer}</Text>
-
+                  <View style={{alignItems:'center',}}>
+                    <Text style={styles.questionText}>
+                        {card.answer}
+                    </Text>
                     <Button mode="outlined" onPress={flipTheCard} >
                       <Text style={{color:'#ee0001'}}>
                         Show Question
