@@ -55,7 +55,7 @@ class AddCardView extends Component {
                     <Button mode="contained"
                         disabled={this.state.question === "" || this.state.answer === "" }
                         onPress={() => this.submitCardToDeck()}>
-                        Submit
+                        Add Card
                     </Button>
                 </KeyboardAvoidingView>
             </ScrollView>

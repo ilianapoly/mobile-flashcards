@@ -24,7 +24,7 @@ const router = {
     AddDeckView: {
       screen: AddDeckView,
       navigationOptions: {
-        tabBarLabel: "Add Deck"
+        tabBarLabel: "Create Deck"
       }
     }
 };

@@ -14,7 +14,7 @@ class QuestionCard extends Component {
                         <Text>{card.question}</Text>
                         <Button mode="contained"
                             onPress={flipTheCard}>
-                            View Answer
+                            Show Answer
                         </Button>
                   </View>
             );
@@ -29,7 +29,7 @@ class QuestionCard extends Component {
                         <Text>{card.answer}</Text>
                         <Button mode="contained"
                             onPress={flipTheCard}>
-                            View Question
+                            Show Question
                         </Button>
                   </View>
             );

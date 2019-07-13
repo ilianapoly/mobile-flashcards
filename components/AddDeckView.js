@@ -44,7 +44,7 @@ class AddDeckView extends Component {
             <ScrollView>
                 <KeyboardAvoidingView behavior="padding">
                     <Text>
-                        Add new Deck
+                        Create Deck
                     </Text>
                     <TextInput
                         label='Title'
@@ -54,7 +54,7 @@ class AddDeckView extends Component {
                     <Button mode="contained"
                         disabled={this.state.deckTitle === "" }
                         onPress={() => this.submitDeck()}>
-                        Submit
+                        Create Deck
                     </Button>
                 </KeyboardAvoidingView>
             </ScrollView>

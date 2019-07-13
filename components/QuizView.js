@@ -86,7 +86,7 @@ class QuizView extends Component {
                     <Text>Score: {this.state.totalScore} out of {deck.questions.length}</Text>
                     <Button mode="contained"
                             onPress={() => this.restartQuiz()}>
-                            Restart
+                            Restart Quiz
                     </Button>
                     <Button mode="contained"
                             onPress={() => this.backToDeck()}>
