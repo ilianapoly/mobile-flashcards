@@ -1,7 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 import { Button, Surface } from 'react-native-paper';
+
+const styles = StyleSheet.create({
+  flipBtn:{
+    color:'#ee0001',
+    margin:16
+  },
+  questionText:{
+    fontSize:32,
+    alignSelf: 'center',
+    alignItems:'center',
+    marginBottom:16
+  }
+
+})
 
 class QuestionCard extends Component {
 
@@ -11,15 +25,14 @@ class QuestionCard extends Component {
 
             return (
               <Surface>
-                  <View style={{alignItems:'center',}}>
-                        <Text style={{fontSize:48, alignSelf: 'center', alignItems:'center', marginBottom:16}}>
-                          {card.question}
-                        </Text>
-                        <Button mode="outlined" onPress={flipTheCard} >
-                          <Text style={{color:'#ee0001'}}>Show Answer</Text>
-
-                        </Button>
-                  </View>
+                <View style={{alignItems:'center',}}>
+                  <Text style={styles.questionText}>
+                    {card.question}
+                  </Text>
+                  <Button mode="outlined" onPress={flipTheCard} >
+                    <Text style={styles.flipBtn}>Show Answer</Text>
+                  </Button>
+                </View>
               </Surface>
             );
       }
@@ -30,11 +43,13 @@ class QuestionCard extends Component {
 
             return (
                   <View>
-                        <Text>{card.answer}</Text>
-                        <Button mode="contained"
-                            onPress={flipTheCard}>
-                            Show Question
-                        </Button>
+                    <Text>{card.answer}</Text>
+
+                    <Button mode="outlined" onPress={flipTheCard} >
+                      <Text style={{color:'#ee0001'}}>
+                        Show Question
+                      </Text>
+                    </Button>
                   </View>
             );
       }

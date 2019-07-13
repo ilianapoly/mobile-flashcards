@@ -1,9 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, ScrollView } from "react-native";
+import {View, Text, ScrollView, StyleSheet} from "react-native";
 import {Button, Card, Headline, Paragraph} from 'react-native-paper';
 import QuestionCard from './QuestionCard';
 import { clearStudyNotification, setStudyNotification } from "../utils/api";
+
+const styles = StyleSheet.create({
+  flipBtn:{
+    color:'#ee0001',
+    margin:16
+  },
+  questionText:{
+    fontSize:32,
+    alignSelf: 'center',
+    alignItems:'center',
+    marginBottom:16
+  },
+  card:{
+    margin:16,
+    alignSelf:'center'
+  }
+
+})
 
 class QuizView extends Component {
 
@@ -88,30 +106,25 @@ class QuizView extends Component {
         if (this.state.questionId === deck.questions.length) {
             return (
                 <ScrollView>
-
-
-                    <Text>Quiz Results</Text>
-                    <Text>Deck: {deck.title}</Text>
-                    <Text>Score: {this.state.totalScore} out of {deck.questions.length}</Text>
-                    <Button mode="contained"
-                            onPress={() => this.restartQuiz()}>
-                            Restart Quiz
-                    </Button>
-                    <Button mode="contained"
-                            onPress={() => this.backToDeck()}>
-                            Back to Deck
-                    </Button>
+                  <Text>Quiz Results</Text>
+                  <Text>Deck: {deck.title}</Text>
+                  <Text>Score: {this.state.totalScore} out of {deck.questions.length}</Text>
+                  <Button mode="contained"
+                          onPress={() => this.restartQuiz()}>
+                          Restart Quiz
+                  </Button>
+                  <Button mode="contained"
+                          onPress={() => this.backToDeck()}>
+                          Back to Deck
+                  </Button>
                 </ScrollView>
             )
         }
 
         return (
             <ScrollView>
-              <Card style={{margin:16, alignSelf:'center'}} elevation={4}>
-
-
-
-                <Card.Title  style={{padding:20, }} title={`Deck: ${deck.title}`} />
+              <Card style={styles.card} elevation={4}>
+                <Card.Title title={`Deck: ${deck.title}`} />
 
                 <Card.Content >
                   <Paragraph style={{marginBottom:16}}>Question progress: {this.state.questionId + 1}/{deck.questions.length}</Paragraph>
@@ -120,7 +133,6 @@ class QuizView extends Component {
                       flipTheCard={this.flipTheCard}
                       showQuestion={this.state.showQuestion}
                       card={deck.questions[this.state.questionId]}
-                      style={{fontSize:18, alignItems:'center', justifyItems:'center', margin:16, }}
                   >
                   </QuestionCard>
 
@@ -131,26 +143,20 @@ class QuizView extends Component {
                     >
                             Incorrect
                     </Button>
-                    <Button mode="contained"
-                            onPress={() => this.submitCorrect()}
-                            style={{ marginLeft:32, padding:4, backgroundColor:'#00bf78' }}
-
+                    <Button
+                      mode="contained"
+                      onPress={() => this.submitCorrect()}
+                      style={{ marginLeft:32, padding:4, backgroundColor:'#00bf78' }}
                     >
-                            Correct
+                      Correct
                     </Button>
                   </Card.Actions>
                 </Card.Content>
-
-
-
               </Card>
-
-
             </ScrollView>
         )
     }
 }
-
 
 const mapStateToProps = (decks, navProps) => {
 

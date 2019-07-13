@@ -46,16 +46,9 @@ class DeckView extends Component {
                 Start Quiz
               </Button>
             </Card.Actions>
-
           </Card>
-
-
-
-
-
       </ScrollView>
     )
-
   }
 }
 
