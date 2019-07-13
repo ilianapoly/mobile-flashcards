@@ -1,69 +1,62 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { Avatar, Card, TouchableRipple } from 'react-native-paper';
 import { getDecks } from "../utils/api";
 import { receiveDecks } from "../actions";
 
 
 class DeckListView extends Component {
+  state = {
+    decksRetrieved: false
+  };
 
-    state = {
-        decksRetrieved: false
-    };
+  async componentDidMount() {
+    let decks = await getDecks();
+    this.props.receiveDecks(decks);
 
-    async componentDidMount() {
+    this.setState({
+      decksRetrieved: true
+    });
+  }
 
-        let decks = await getDecks();
+  navigateToDeckView = (deckTitle) => {
+    const { navigate } = this.props.navigation;
+    navigate("DeckView", { deckTitle });
+  };
 
-        this.props.receiveDecks(decks);
+  render() {
 
-        this.setState({
-            decksRetrieved: true
-        });
+    if (!this.state.decksRetrieved) {
+      return (
+        <View>
+          <Text>Retrieving Decks...</Text>
+        </View>
+      );
     }
 
-    navigateToDeckView = (deckTitle) => {
-        const { navigate } = this.props.navigation;
-        navigate("DeckView", { deckTitle });
-    };
+    const { decks } = this.props;
 
-    render() {
+    return (
+      <ScrollView>
+        {Object.keys(decks).map(deckTitle => {
+          const deck = decks[deckTitle];
 
-        if (!this.state.decksRetrieved) {
-            return (
-                <View>
-                    <Text>Retrieving Decks...</Text>
-                </View>
-            );
-        }
-
-        const { decks } = this.props;
-
-        return (
-           <ScrollView>
-
-               {Object.keys(decks).map(deckTitle => {
-
-                 const deck = decks[deckTitle];
-
-                 return (
-                    <TouchableRipple rippleColor="rgba(0, 0, 255, .32)" key={deckTitle} onPress={() => this.navigateToDeckView(deckTitle)}>
-                        <Card style={{padding:8, margin:16, backgroundColor:'#ffffff'}} elevation={2}>
-                            <Card.Title style={{padding:20, margin:16, }} title={deck.title} subtitle={`${deck.questions.length} cards`} left={(props) => <Avatar.Icon {...props} icon="folder" />}>
-                            </Card.Title>
-                        </Card>
-                   </TouchableRipple>
-                 );
-
-               })}
-            </ScrollView>
-        );
-    }
+          return (
+            <Card key={deckTitle} style={{padding:8, margin:16, backgroundColor:'#ffffff', flex:1, justifyContent:'space-around'}} elevation={2}>
+              <TouchableRipple rippleColor="rgba(0, 0, 255, .32)"  onPress={() => this.navigateToDeckView(deckTitle)}>
+                <Card.Title style={{padding:20, margin:16, }} title={deck.title} subtitle={`${deck.questions.length} cards`} left={(props) => <Avatar.Icon {...props} icon="folder" />}>
+                </Card.Title>
+              </TouchableRipple>
+            </Card>
+          );
+        })}
+      </ScrollView>
+    );
+  }
 }
 
 const mapStateToProps = decks => {
-
   return { decks };
 };
 

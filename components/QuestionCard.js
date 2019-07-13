@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
-import { Button, Surface } from 'react-native-paper';
+import { View, Text, StyleSheet } from "react-native";
+import { Button } from 'react-native-paper';
 
 const styles = StyleSheet.create({
   flipBtn:{
@@ -14,56 +13,44 @@ const styles = StyleSheet.create({
     alignItems:'center',
     marginBottom:16
   }
-
 })
 
 class QuestionCard extends Component {
+  showQuestion(flipTheCard) {
+    const { card } = this.props;
+      return (
+        <View sytle={{flex:1, alignItems:'flex-end'}}>
+          <Text style={styles.questionText}>
+            {card.question}
+          </Text>
 
-      showQuestion(flipTheCard) {
+          <Button mode="outlined" onPress={flipTheCard} >
+            <Text style={styles.flipBtn}>Show Answer</Text>
+          </Button>
+      </View>
+    );
+  }
 
-            const { card } = this.props;
+  showAnswer(flipTheCard) {
+    const { card } = this.props;
+    return (
+      <View>
+        <Text style={styles.questionText}>
+          {card.answer}
+        </Text>
 
-            return (
-              <Surface>
-                <View style={{alignItems:'center',}}>
-                  <Text style={styles.questionText}>
-                    {card.question}
-                  </Text>
-                  <Button mode="outlined" onPress={flipTheCard} >
-                    <Text style={styles.flipBtn}>Show Answer</Text>
-                  </Button>
-                </View>
-              </Surface>
-            );
-      }
+        <Button mode="outlined" onPress={flipTheCard} >
+          <Text style={styles.flipBtn}>Show Question</Text>
+        </Button>
+      </View>
+    );
+  }
 
-      showAnswer(flipTheCard) {
-
-            const { card } = this.props;
-
-            return (
-                  <View>
-                    <Text>{card.answer}</Text>
-
-                    <Button mode="outlined" onPress={flipTheCard} >
-                      <Text style={{color:'#ee0001'}}>
-                        Show Question
-                      </Text>
-                    </Button>
-                  </View>
-            );
-      }
-
-      render() {
-
-            const { showQuestion, flipTheCard } = this.props;
-
-            return showQuestion ?
-                this.showQuestion(flipTheCard)
-              : this.showAnswer(flipTheCard);
-
-      }
-
+  render() {
+    const { showQuestion, flipTheCard } = this.props;
+    return showQuestion ? this.showQuestion(flipTheCard) : this.showAnswer(flipTheCard);
+  }
 }
 
 export default QuestionCard;
+
