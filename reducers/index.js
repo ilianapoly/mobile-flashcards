@@ -23,9 +23,9 @@ function decks(state={},action) {
     case ADD_CARD_TO_DECK:
       return {
         ...state,
-        [ action.deckId ]: {
-          ...state[action.deckId],
-          questions: [...state[action.deckId].questions, action.newCard]
+        [ action.deckTitle ]: {
+          ...state[action.deckTitle],
+          questions: [...state[action.deckTitle].questions, action.newCard]
         }
       };
 

@@ -22,16 +22,16 @@ export async function saveDeckTitle ( deckTitle ) {
     await AsyncStorage.mergeItem( DECKS_STORAGE_KEY, JSON.stringify(deckTitle) );
 }
 
-export async function addCardToDeck( deckTitle, newCard ) {
+export async function saveCardToDeck( deckTitle, newCard ) {
 
     const data = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
 
-    const allDecks = JSON.parse(data);
+    const decks = JSON.parse(data);
 
-    allDecks[deckTitle] = {
-        ...allDecks[deckTitle],
-        questions: [...allDecks[deckTitle].questions, newCard]
+    decks[deckTitle] = {
+        ...decks[deckTitle],
+        questions: [...decks[deckTitle].questions, newCard]
     };
 
-    await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(allDecks));
+    await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks));
  }
