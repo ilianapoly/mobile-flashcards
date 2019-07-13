@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import { createMaterialTopTabNavigator } from "react-navigation-tabs";
 import reducer from "./reducers";
+import { setStudyNotification } from "./utils/api";
 import DeckListView from "./components/DeckListView";
 import DeckView from "./components/DeckView";
 import AddCardView from "./components/AddCardView";
@@ -58,6 +59,11 @@ const AppContainer = createAppContainer(MainNavigator);
 
 
 export default class App extends Component {
+
+  async componentDidMount() {
+
+    await setStudyNotification();
+  }
 
   render() {
     return (
