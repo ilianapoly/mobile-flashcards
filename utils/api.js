@@ -17,9 +17,9 @@ export async function getDecks() {
     return JSON.parse(data);
 }
 
-export async function saveDeckTitle ( deckTitle ) {
+export async function saveNewDeck ( newDeck ) {
 
-    await AsyncStorage.mergeItem( DECKS_STORAGE_KEY, JSON.stringify(deckTitle) );
+    await AsyncStorage.mergeItem( DECKS_STORAGE_KEY, JSON.stringify(newDeck) );
 }
 
 export async function saveCardToDeck( deckTitle, newCard ) {

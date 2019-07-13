@@ -18,7 +18,7 @@ class AddCardView extends Component {
         const { navigate } = this.props.navigation;
         const { deckTitle } = this.props.navigation.state.params;
 
-        const newCard = this.createCardObject(this.state.question, this.state.answer);
+        const newCard = this.createCardToSave(this.state.question, this.state.answer);
 
         await saveCardToDeck(deckTitle, newCard);
 
@@ -27,7 +27,7 @@ class AddCardView extends Component {
         navigate("DeckView", { deckTitle });
     }
 
-    createCardObject(question, answer) {
+    createCardToSave(question, answer) {
         return { question, answer };
     }
 

@@ -20,6 +20,13 @@ class DeckView extends Component {
   render() {
 
     const { deck } = this.props;
+if (!deck) {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
+    }
 
     return (
 

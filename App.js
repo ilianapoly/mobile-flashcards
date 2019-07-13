@@ -10,6 +10,7 @@ import DeckListView from "./components/DeckListView";
 import DeckView from "./components/DeckView";
 import AddCardView from "./components/AddCardView";
 import QuizView from "./components/QuizView";
+import AddDeckView from "./components/AddDeckView";
 
 const store = createStore(reducer);
 
@@ -18,6 +19,12 @@ const router = {
       screen: DeckListView,
       navigationOptions: {
         tabBarLabel: "Decks"
+      }
+    },
+    AddDeckView: {
+      screen: AddDeckView,
+      navigationOptions: {
+        tabBarLabel: "Add Deck"
       }
     }
 };
