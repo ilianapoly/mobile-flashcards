@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text, ScrollView } from "react-native";
 import { Button } from 'react-native-paper';
+import QuestionCard from './QuestionCard';
 
 class QuizView extends Component {
 
@@ -36,6 +37,7 @@ class QuizView extends Component {
     }
 
     restartQuiz = () => {
+
         this.setState({
             totalScore: 0,
             questionId: 0
@@ -48,6 +50,13 @@ class QuizView extends Component {
 
         navigate("DeckView", { deckTitle: this.props.deck.title });
     }
+
+    flipTheCard = () => {
+
+        this.setState(lastState => {
+            return { showQuestion: !lastState.showQuestion };
+        });
+    };
 
     render() {
 
@@ -72,6 +81,9 @@ class QuizView extends Component {
         if (this.state.questionId === deck.questions.length) {
             return (
                 <ScrollView>
+                    <Text>Quiz Results</Text>
+                    <Text>Deck: {deck.title}</Text>
+                    <Text>Score: {this.state.totalScore} out of {deck.questions.length}</Text>
                     <Button mode="contained"
                             onPress={() => this.restartQuiz()}>
                             Restart
@@ -86,8 +98,14 @@ class QuizView extends Component {
 
         return (
             <ScrollView>
-                <Text>{deck.title} Quiz</Text>
+                <Text>Quiz</Text>
+                <Text>Deck: {deck.title}</Text>
                 <Text>Question: {this.state.questionId + 1}/{deck.questions.length}</Text>
+                <QuestionCard
+                    flipTheCard={this.flipTheCard}
+                    showQuestion={this.state.showQuestion}
+                    card={deck.questions[this.state.questionId]}>
+                </QuestionCard>
                 <Button mode="contained"
                         onPress={() => this.submitCorrect()}>
                         Correct
