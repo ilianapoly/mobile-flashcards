@@ -4,9 +4,9 @@ ADD_NEW_DECK,
 ADD_CARD_TO_DECK
 } from "../actions";
 
-function decks( state = {}, action ) {
+function decks(state={},action) {
 
-  switch ( action. type ) {
+  switch (action.type) {
 
     case RECEIVE_DECKS:
       return {

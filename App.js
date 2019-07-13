@@ -1,18 +1,68 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as StoreProvider } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createMaterialTopTabNavigator } from "react-navigation-tabs";
 import reducer from "./reducers";
+import DeckListView from "./components/DeckListView";
+import DeckView from "./components/DeckView";
+import AddCardView from "./components/AddCardView";
+import QuizView from "./components/QuizView";
 
 const store = createStore(reducer);
 
-export default function App() {
-  return (
-      <Provider store={store}>
-        <View style={{ flex: 1 }}>
-          <Text>Test</Text>+
-          <AppContainer />
-        </View>
-      </Provider>
-  );
+const router = {
+    DeckListView: {
+      screen: DeckListView,
+      navigationOptions: {
+        tabBarLabel: "Decks"
+      }
+    }
+};
+
+const navigationOptions = {
+  tabBarOptions: {
+
+  }
+};
+
+const MainNavigator = createStackNavigator({
+
+    DeckListView: {
+        screen:
+        createMaterialTopTabNavigator(
+            router,
+            navigationOptions)
+    },
+    DeckView: {
+        screen: DeckView,
+    },
+    AddCardView: {
+        screen: AddCardView,
+    },
+    QuizView: {
+        screen: QuizView,
+    },
+
+});
+
+const AppContainer = createAppContainer(MainNavigator);
+
+
+export default class App extends Component {
+
+  render() {
+    return (
+        <StoreProvider store={store}>
+          <PaperProvider>
+            <View style={{ flex: 1 }}>
+              <AppContainer />
+            </View>
+         </PaperProvider>
+       </StoreProvider>
+
+    );
+  }
 }
