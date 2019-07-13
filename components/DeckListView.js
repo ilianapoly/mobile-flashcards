@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
-import { Avatar, Card } from 'react-native-paper';
+import { Avatar, Card, TouchableRipple } from 'react-native-paper';
 import { getDecks } from "../utils/api";
 import { receiveDecks } from "../actions";
 
@@ -48,11 +48,12 @@ class DeckListView extends Component {
                  const deck = decks[deckTitle];
 
                  return (
-                    <TouchableOpacity key={deckTitle} onPress={() => this.navigateToDeckView(deckTitle)}>
+                    <TouchableRipple rippleColor="rgba(0, 0, 255, .32)" key={deckTitle} onPress={() => this.navigateToDeckView(deckTitle)}>
                         <Card style={{padding:8, margin:16, backgroundColor:'#ffffff'}} elevation={2}>
-                            <Card.Title style={{padding:20, margin:16, }} title={deck.title} subtitle={`${deck.questions.length} cards`} left={(props) => <Avatar.Icon {...props} icon="folder" />} />
+                            <Card.Title style={{padding:20, margin:16, }} title={deck.title} subtitle={`${deck.questions.length} cards`} left={(props) => <Avatar.Icon {...props} icon="folder" />}>
+                            </Card.Title>
                         </Card>
-                   </TouchableOpacity>
+                   </TouchableRipple>
                  );
 
                })}

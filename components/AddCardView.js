@@ -39,24 +39,25 @@ class AddCardView extends Component {
 
             <ScrollView >
                 <KeyboardAvoidingView behavior="padding">
-                    <Text>
-                        Add new card for deck {deckTitle}
-                    </Text>
-                    <TextInput
-                        label='Question'
-                        value={this.state.question}
-                        onChangeText={question => this.setState({ question })}
-                     />
-                    <TextInput
-                          label='Answer'
-                          value={this.state.answer}
-                          onChangeText={answer => this.setState({ answer })}
-                    />
-                    <Button mode="contained"
-                        disabled={this.state.question === "" || this.state.answer === "" }
-                        onPress={() => this.submitCardToDeck()}>
-                        Add Card
-                    </Button>
+                    <View style={{padding:8, margin:16, backgroundColor:'#fff',  }}>
+                        <TextInput
+                            label='Question'
+                            value={this.state.question}
+                            onChangeText={question => this.setState({ question })}
+                         />
+                        <TextInput
+                               style={{marginTop:16}}
+                              label='Answer'
+                              value={this.state.answer}
+                              onChangeText={answer => this.setState({ answer })}
+                        />
+                        <Button mode="contained"
+                            style={{marginTop:16}}
+                            disabled={this.state.question === "" || this.state.answer === "" }
+                            onPress={() => this.submitCardToDeck()}>
+                            Add Card
+                        </Button>
+                    </View>
                 </KeyboardAvoidingView>
             </ScrollView>
         )

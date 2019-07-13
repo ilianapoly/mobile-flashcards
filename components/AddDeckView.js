@@ -43,19 +43,19 @@ class AddDeckView extends Component {
 
             <ScrollView>
                 <KeyboardAvoidingView behavior="padding">
-                    <Text>
-                        Create Deck
-                    </Text>
-                    <TextInput
-                        label='Title'
-                        value={this.state.deckTitle}
-                        onChangeText={deckTitle => this.setState({ deckTitle })}
-                     />
-                    <Button mode="contained"
-                        disabled={this.state.deckTitle === "" }
-                        onPress={() => this.submitDeck()}>
-                        Create Deck
-                    </Button>
+                    <View style={{padding:8, margin:16, backgroundColor:'#fff',  }}>
+                        <TextInput
+                            label='Title'
+                            value={this.state.deckTitle}
+                            onChangeText={deckTitle => this.setState({ deckTitle })}
+                         />
+                        <Button mode="contained" style={{marginTop:16}}
+
+                            disabled={this.state.deckTitle === "" }
+                            onPress={() => this.submitDeck()}>
+                            Create Deck
+                        </Button>
+                    </View>
                 </KeyboardAvoidingView>
             </ScrollView>
         )

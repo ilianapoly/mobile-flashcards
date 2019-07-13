@@ -42,7 +42,9 @@ class DeckView extends Component {
               <Button mode="outlined" onPress={() => this.navigateToAddCardView()} >
                 Add Card
               </Button>
-              <Button mode="contained" onPress={() => this.navigateToQuiz()} style={{marginLeft:16}}>
+              <Button
+                style={{marginLeft:16}}
+                mode="contained" onPress={() => this.navigateToQuiz()} >
                 Start Quiz
               </Button>
             </Card.Actions>
