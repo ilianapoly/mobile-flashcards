@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, ScrollView, TouchableOpacity, Text } from 'react-native';
-import { Card } from 'react-native-paper';
+import { Avatar, Card } from 'react-native-paper';
 import { getDecks } from "../utils/api";
 import { receiveDecks } from "../actions";
+
 
 class DeckListView extends Component {
 
@@ -48,9 +49,8 @@ class DeckListView extends Component {
 
                  return (
                     <TouchableOpacity key={deckTitle} onPress={() => this.navigateToDeckView(deckTitle)}>
-                        <Card >
-                            <Text>{deck.title}</Text>
-                            <Text>{deck.questions.length}</Text>
+                        <Card style={{padding:8, margin:16, backgroundColor:'#fff'}} elevation={2}>
+                            <Card.Title style={{padding:20, margin:16, }} title={deck.title} subtitle={`${deck.questions.length} cards`} left={(props) => <Avatar.Icon {...props} icon="folder" />} />
                         </Card>
                    </TouchableOpacity>
                  );

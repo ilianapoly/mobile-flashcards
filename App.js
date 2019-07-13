@@ -52,7 +52,6 @@ const MainNavigator = createStackNavigator({
     QuizView: {
         screen: QuizView,
     },
-
 });
 
 const AppContainer = createAppContainer(MainNavigator);
@@ -69,7 +68,6 @@ export default class App extends Component {
             </View>
          </PaperProvider>
        </StoreProvider>
-
     );
   }
 }
