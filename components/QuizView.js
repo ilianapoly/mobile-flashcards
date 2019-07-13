@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { View, Text, ScrollView } from "react-native";
 import { Button, Card, Headline } from 'react-native-paper';
 import QuestionCard from './QuestionCard';
+import { clearStudyNotification, setStudyNotification } from "../utils/api";
 
 class QuizView extends Component {
 
@@ -24,6 +25,9 @@ class QuizView extends Component {
                 showQuestion: true
             };
         });
+
+       await clearStudyNotification();
+       await setStudyNotification();
     }
 
     submitIncorrect = async () => {
@@ -34,6 +38,9 @@ class QuizView extends Component {
                 showQuestion: true
             };
         });
+
+       await clearStudyNotification();
+       await setStudyNotification();
     }
 
     restartQuiz = () => {

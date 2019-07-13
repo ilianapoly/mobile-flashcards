@@ -3,9 +3,10 @@ import { createStore } from "redux";
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createAppContainer, createStackNavigator, HeaderBackButton } from "react-navigation";
 import { createMaterialTopTabNavigator } from "react-navigation-tabs";
 import reducer from "./reducers";
+import { setStudyNotification } from "./utils/api";
 import DeckListView from "./components/DeckListView";
 import DeckView from "./components/DeckView";
 import AddCardView from "./components/AddCardView";
@@ -14,7 +15,7 @@ import AddDeckView from "./components/AddDeckView";
 
 const store = createStore(reducer);
 
-const router = {
+const mainViewNavigationBarRoutes = {
     DeckListView: {
       screen: DeckListView,
       navigationOptions: {
@@ -24,40 +25,70 @@ const router = {
     AddDeckView: {
       screen: AddDeckView,
       navigationOptions: {
-        tabBarLabel: "Create Deck"
+        tabBarLabel: "Add Deck"
       }
     }
 };
 
-const navigationOptions = {
-  tabBarOptions: {
+const mainViewNavigationBarStyles = {
+    tabBarOptions: {
+      activeTintColor: "white",
+      inactiveTintColor: "white",
+      inactiveBackgroundColor: "gray",
+      activeBackgroundColor: "blue",
+      style: {
+        backgroundColor: "blue"
+      }
+    }
+};
 
-  }
+const subViewNavigationBarStyles = {
+    headerTintColor: "white",
+    headerStyle: {
+      backgroundColor: "blue"
+    }
 };
 
 const MainNavigator = createStackNavigator({
 
     DeckListView: {
-        screen:
-        createMaterialTopTabNavigator(
-            router,
-            navigationOptions)
+        screen: createMaterialTopTabNavigator(mainViewNavigationBarRoutes, mainViewNavigationBarStyles),
+        navigationOptions: {
+           ...mainViewNavigationBarStyles,
+           title: "Mobile Flashcards"
+        }
     },
     DeckView: {
         screen: DeckView,
+        navigationOptions: {
+            ...subViewNavigationBarStyles,
+            title: "Deck"
+        }
     },
     AddCardView: {
         screen: AddCardView,
+        navigationOptions: {
+            ...subViewNavigationBarStyles,
+            title: "Add Card"
+        }
     },
     QuizView: {
         screen: QuizView,
-    },
+        navigationOptions: {
+            ...subViewNavigationBarStyles,
+            title: "Quiz"
+        }
+    }
 });
 
 const AppContainer = createAppContainer(MainNavigator);
 
-
 export default class App extends Component {
+
+  async componentDidMount() {
+
+    await setStudyNotification();
+  }
 
   render() {
     return (

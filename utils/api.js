@@ -1,8 +1,10 @@
 import { AsyncStorage } from "react-native";
-import { getInitialData } from "./_DATA";
-
+import { Notifications } from "expo";
+import { getInitialData } from "./_DATA"
+import * as Permissions from 'expo-permissions'
 
 const DECKS_STORAGE_KEY = "MobileFlashCards:Decks";
+const STUDY_REMINDER_KEY = "MobileFlashCards:Reminder";
 
 export async function getDecks() {
 
@@ -34,4 +36,52 @@ export async function saveCardToDeck( deckTitle, newCard ) {
     };
 
     await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks));
- }
+}
+
+export async function clearStudyNotification() {
+
+    await AsyncStorage.removeItem(STUDY_REMINDER_KEY);
+    Notifications.cancelAllScheduledNotificationsAsync();
+}
+
+export async function setStudyNotification() {
+
+    const dataRaw = await AsyncStorage.getItem(STUDY_REMINDER_KEY);
+    const data = JSON.parse(dataRaw);
+
+    if (data === null) {
+
+        const permissionsNotifications = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+
+        if (permissionsNotifications.status === "granted") {
+
+            Notifications.cancelAllScheduledNotificationsAsync();
+
+            let tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(13);
+            tomorrow.setMinutes(40);
+
+            Notifications.scheduleLocalNotificationAsync(notification(), {
+                time: tomorrow,
+                repeat: "day"
+            });
+
+            AsyncStorage.setItem(STUDY_REMINDER_KEY, JSON.stringify(true));
+        }
+    }
+
+    function notification() {
+
+        return {
+            title: "mobile-flashcards",
+            body: "Study Time!",
+            android: {
+              priority: "high",
+              sound: false,
+              sticky: false,
+              vibrate: false
+            }
+        };
+    }
+}
