@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, Text, ScrollView } from "react-native";
-import { Button, Card, Headline } from 'react-native-paper';
+import {Button, Card, Headline, Paragraph} from 'react-native-paper';
 import QuestionCard from './QuestionCard';
 import { clearStudyNotification, setStudyNotification } from "../utils/api";
 
@@ -107,36 +107,42 @@ class QuizView extends Component {
 
         return (
             <ScrollView>
-              <Card style={{padding:8, margin:16, backgroundColor:'#effff7', alignSelf:'center'}} elevation={4}>
+              <Card style={{margin:16, alignSelf:'center'}} elevation={4}>
 
-                <Text>Quiz</Text>
 
-                <Text >Question: {this.state.questionId + 1}/{deck.questions.length}</Text>
 
-                <Card.Title  style={{padding:20, margin:16, }} title={`Deck: ${deck.title}`} />
+                <Card.Title  style={{padding:20, }} title={`Deck: ${deck.title}`} />
 
-                    <QuestionCard
-                        flipTheCard={this.flipTheCard}
-                        showQuestion={this.state.showQuestion}
-                        card={deck.questions[this.state.questionId]}
-                        style={{fontSize:24}}
+                <Card.Content >
+                  <Paragraph style={{marginBottom:16}}>Question progress: {this.state.questionId + 1}/{deck.questions.length}</Paragraph>
+
+                  <QuestionCard
+                      flipTheCard={this.flipTheCard}
+                      showQuestion={this.state.showQuestion}
+                      card={deck.questions[this.state.questionId]}
+                      style={{fontSize:18, alignItems:'center', justifyItems:'center', margin:16, }}
+                  >
+                  </QuestionCard>
+
+                  <Card.Actions style={{ justifyContent:'flex-end', marginTop:64}} elevation={2}>
+                    <Button mode="contained"
+                            onPress={() => this.submitIncorrect()}
+                            style={{ marginLeft:24, padding:4, backgroundColor:'#ee534c'}}
                     >
-                    </QuestionCard>
-                <Card.Actions style={{ justifyContent:'flex-end', marginTop:64}} elevation={2}>
-                  <Button mode="contained"
-                          onPress={() => this.submitCorrect()}
-                          style={{ marginLeft:32, padding:4, backgroundColor:'#00bf78' }}
+                            Incorrect
+                    </Button>
+                    <Button mode="contained"
+                            onPress={() => this.submitCorrect()}
+                            style={{ marginLeft:32, padding:4, backgroundColor:'#00bf78' }}
 
-                  >
-                          Correct
-                  </Button>
-                  <Button mode="contained"
-                          onPress={() => this.submitIncorrect()}
-                          style={{ marginLeft:24, padding:4, backgroundColor:'#ee534c'}}
-                  >
-                          Incorrect
-                  </Button>
-                </Card.Actions>
+                    >
+                            Correct
+                    </Button>
+                  </Card.Actions>
+                </Card.Content>
+
+
+
               </Card>
 
 

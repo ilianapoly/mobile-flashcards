@@ -11,8 +11,8 @@ class QuestionCard extends Component {
 
             return (
               <Surface>
-                  <View style={{alignItems:'center'}}>
-                        <Text style={{fontSize:48, alignSelf: 'center', alignItems:'center'}}>
+                  <View style={{alignItems:'center',}}>
+                        <Text style={{fontSize:48, alignSelf: 'center', alignItems:'center', marginBottom:16}}>
                           {card.question}
                         </Text>
                         <Button mode="outlined" onPress={flipTheCard} >
