@@ -1,5 +1,9 @@
 # mobile-flashcards
 React Native App for Android. The app is a memory aid for the users to learn information.
+This app was built as a project for the Udacity React Nanodegree program.
+Refer to the [RUBRIC.md](https://github.com/ilianapoly/mobile-flashcards/blob/master/RUBRIC.md) for the project specificaiton.
+
+For this project the Android Studio Emulator together with  Expo, so that the app can load and run projects built by Create React Native App with the same JavaScript you already know. There's no need to compile any native code. And much like Create React App, using Expo with Create React Native App lets us get an application up and running with almost no configuration. 
 
 ## To Install and Launch App
 #### Using Yarn
@@ -11,7 +15,9 @@ yarn start
 ```
 
 #### Using Expo
+[Expo installation guide](https://docs.expo.io/versions/latest/introduction/installation/)
 ```
+Install Expo
 git clone https://github.com/ilianapoly/mobile-flashcards
 cd mobile-flashcards
 yarn install
